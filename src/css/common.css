@@ -1,0 +1,30 @@
+@charset "utf-8";/* CSS Document */
+
+/* reset */
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:400;}
+html,body,img,iframe,abbr{border:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+h1,h2,h3,h4,h5,h6{font-weight:400;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+body,textarea,input,button,select,keygen,legend{font:12px/1.5 "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","微软雅黑",tahoma,simsun,"宋体";color:#333;outline:0;}
+body{background:#fff;}
+a{color:#333;font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","微软雅黑",tahoma,simsun,"宋体";}
+i,em{font-style:normal;}
+
+/*底部样式*/
+
+
+
+
+
+
+/*清除浮动*/
+.clearfix:after{content:".";display:block;height:0;visibility:hidden;clear:both;}
+.clearfix{zoom:1;}
