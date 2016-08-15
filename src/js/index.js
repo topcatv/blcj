@@ -6,6 +6,11 @@ import 'imports?jQuery=jquery!lightslider';
 import 'animate.css'
 import animateCss from 'animate.css-js'
 import './scroll.page'
+const screenHeight = $(window).height()
+$(function() {
+  $('.mod').height(screenHeight)
+  $('.m1-pop').height(screenHeight - 100);
+})
 
 $(".light-slider").lightSlider({
     auto: true,
