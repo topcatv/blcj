@@ -1,5 +1,6 @@
 import '../css/common.css'
 import '../css/front.css'
+import 'babel-polyfill'
 import 'lightslider/dist/css/lightslider.min.css'
 import $ from 'jquery';
 import 'imports?jQuery=jquery!lightslider';
@@ -9,7 +10,8 @@ import './scroll.page'
 const screenHeight = $(window).height()
 $(function() {
   $('.mod').height(screenHeight)
-  $('.m1-pop').height(screenHeight - 100);
+  $('.m1-pop').height(screenHeight - 100)
+  $('body').css('overflow', 'hidden')
 })
 
 $(".light-slider").lightSlider({

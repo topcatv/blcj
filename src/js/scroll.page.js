@@ -59,6 +59,14 @@ $('.mod3 > .menu > li > a').on('click', function (e) {
     let index = $(e.currentTarget).data('index')
     if (mod3Position === 0) {
         $('.mod3_0').hide()
+        $('.mod3_1').show()
+        animateCss.animate($('.mod3_1').get(0), {
+            animationName: 'fadeInLeft',
+            duration: 500,
+            callbacks: [
+
+            ]
+          })
     }
     $('.mod3 > .menu > li').removeClass('cur')
     $(`.mod3 > .menu > li:eq(${index-1})`).addClass('cur')
@@ -109,6 +117,7 @@ $('.mod4 .mn li a').on('click', function (e) {
 
 $('.mod7 > .menu > li > a').on('click', function (e) {
     e.preventDefault()
+    console.log('aaaaa');
     let index = $(e.currentTarget).data('index')
     let currentPos = Number.parseInt(mod7Position)
     $('.mod7 .menu li').removeClass('cur')
@@ -131,7 +140,7 @@ $('.mod7 > .menu > li > a').on('click', function (e) {
 
     mod7Position = index - 1
 })
-$('.mod8 .mod8-title a').on('click', function (e) {
+$('.mod8 .mod8-title a').on('mouseover', function (e) {
     e.preventDefault()
     let index = $(e.currentTarget).data('index')
     let currentPos = Number.parseInt(mod8Position)
@@ -230,7 +239,7 @@ function mod3next() {
                   $('.mod3_1_1').show()
                   animateCss.animate($('.mod3_1_1').get(0), {
                       animationName: 'fadeIn',
-                      duration: 1000,
+                      duration: 300,
                       callbacks: [
                           function () {
                               $('.mod3_1_2').show()
@@ -254,7 +263,7 @@ function mod3next() {
         $('.mod3_2_1').show()
         animateCss.animate($('.mod3_2_1').get(0), {
             animationName: 'fadeIn',
-            duration: 900,
+            duration: 300,
             callbacks: [
                 function () {
                     $('.mod3_2_2').show()
@@ -275,7 +284,7 @@ function mod3next() {
         $('.mod3_3_1').show()
         animateCss.animate($('.mod3_3_1').get(0), {
             animationName: 'fadeIn',
-            duration: 900,
+            duration: 300,
             callbacks: [
                 function () {
                     $('.mod3_3_2').show()
@@ -301,7 +310,7 @@ function mod3pre() {
             // $('.mod3 .menu li:eq(0)').addClass('cur')
         animateCss.animate($('.mod3_1_2').get(0), {
             animationName: 'fadeOutDown',
-            duration: 500,
+            duration: 300,
             callbacks: [(() => {
                 $('.mod3_1_2').hide()
                 $('.mod3_1_1').hide()
@@ -318,7 +327,7 @@ function mod3pre() {
         $('.mod3_1_1').show()
         animateCss.animate($('.mod3_1_1').get(0), {
             animationName: 'fadeIn',
-            duration: 900,
+            duration: 300,
             callbacks: [
                 function () {
                     $('.mod3_1_2').show()
@@ -339,7 +348,7 @@ function mod3pre() {
         $('.mod3_2_1').show()
         animateCss.animate($('.mod3_2_1').get(0), {
             animationName: 'fadeIn',
-            duration: 900,
+            duration: 300,
             callbacks: [
                 function () {
                     $('.mod3_2_2').show()

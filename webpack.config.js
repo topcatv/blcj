@@ -1,9 +1,18 @@
 var webpack = require('webpack');
 var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 var plugins = [
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new CopyWebpackPlugin([
+        // Copy directory contents to {output}/
+        {
+            from: 'src/images',
+            to: 'images'
+        }
+    ])
 ];
 
 plugins.push(
@@ -18,11 +27,17 @@ plugins.push(
     })
 );
 
-var loaders = [
-   { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
-   { test: /\.css$/, loader: "style-loader!css-loader" },
-   { test: /\.(png|jpg)$/, loader: 'url-loader' }
-];
+var loaders = [{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    loader: "babel-loader"
+}, {
+    test: /\.css$/,
+    loader: "style-loader!css-loader"
+}, {
+    test: /\.(png|jpg)$/,
+    loader: 'url-loader'
+}];
 
 module.exports = {
     entry: {
