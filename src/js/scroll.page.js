@@ -3,7 +3,7 @@ import $ from 'jquery'
 import HashChange from 'hashchange'
 import animateCss from 'animate.css-js'
 
-let ws = new WheelSwipe()
+new WheelSwipe()
 let position = 0
 let mod3Position = 0
 let mod4Position = 0

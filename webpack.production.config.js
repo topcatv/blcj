@@ -1,12 +1,26 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 var extractCSS = new ExtractTextPlugin('[name].css');
 
 var plugins = [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
     extractCSS,
+    new CopyWebpackPlugin([
+        // Copy directory contents to {output}/
+        {
+            from: 'src/images',
+            to: 'images'
+        }, {
+            from: 'src/fonts',
+            to: 'fonts'
+        }
+    ]),
     new HtmlWebpackPlugin({
         template: './src/html/index.html',
         filename: 'html/index.html',
@@ -24,7 +38,7 @@ var loaders = [{
         loader: "babel"
     }, {
         test: /\.css$/,
-        loader: extractCSS.extract('style', 'css?sourceMap')
+        loader: extractCSS.extract('style', 'css')
     }, {
         test: /\.(png|jpg)$/,
         loader: 'url'
@@ -48,23 +62,12 @@ var loaders = [{
 ];
 
 module.exports = {
-    devtool: 'source-map',
     entry: {
         'js/index': './src/js/index.js'
     },
     output: {
-        path: './build',
-        filename: '[name].js'
-    },
-    devServer: {
-        progress: true,
-        host: '0.0.0.0',
-        port: 8080,
-        colors: true,
-        inline: true,
-        hot: true,
-        contentBase: './src',
-        displayErrorDetails: true
+        path: __dirname + "/build",
+        filename: "[name].js"
     },
     module: {
         loaders: loaders

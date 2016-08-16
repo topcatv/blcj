@@ -1,4 +1,33 @@
 @charset "utf-8";
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon.eot');
+    src: url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf') format('truetype'), url('../fonts/icomoon.woff') format('woff'), url('../fonts/icomoon.svg?#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-3:before {
+    content: "\e900";
+}
+.icon-2:before {
+    content: "\e901";
+}
+.icon-1:before {
+    content: "\e902";
+}
 .mod {
     width: 100%;
     min-width: 1200px;
@@ -212,40 +241,42 @@
 }
 .tab-h li {
     float: left;
-    height: 280px;
+    height: 250px;
     width: 29%;
-    padding: 0 2% 25px;
+    padding: 50px 2% 25px;
     text-align: center;
     cursor: pointer;
+}
+.tab-h li.act, .tab-h li:hover {
+    padding: 50px 2% 25px;
 }
 .tab-h li span {
     display: block;
     position: relative;
 }
-.ico-tab {
-    background: url(../images/mod2_ico.png) no-repeat;
+.tab-h li .icon-font {
     display: block;
+    color: #bbb;
+    font-size: 50px;
+    height: 50px;
+    width: 50px;
+    margin: 0 auto 30px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+.tab-h li.act .icon-font, .tab-h li:hover .icon-font {
+    color: #e84c3d;
+    font-size: 80px;
     height: 80px;
     width: 80px;
-    margin: 40px auto 20px;
-}
-.ico-t1 {
-    background-position: 10px 25px;
-}
-.ico-t2 {
-    background-position: -85px 29px;
-}
-.ico-t3 {
-    background-position: -186px 35px;
-}
-.tab-h li.act .ico-t1, .tab-h li:hover .ico-t1 {
-    background-position: 0 -95px;
-}
-.tab-h li.act .ico-t2, .tab-h li:hover .ico-t2 {
-    background-position: -130px -95px;
-}
-.tab-h li.act .ico-t3, .tab-h li:hover .ico-t3 {
-    background-position: -260px -85px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 .tabh-txt1 {
     font-size: 18px;
@@ -256,11 +287,11 @@
 .tab-h li.act .tabh-txt1, .tab-h li:hover .tabh-txt1 {
     color: #ff1600;
     font-size: 24px;
-		-webkit-transition:all 0.5s ease-in-out;
-	  -o-transition:all 0.5s ease-in-out;
-	  -ms-transition:all 0.5s ease-in-out;
-	  -moz-transition:all 0.5s ease-in-out;
-	  transition:all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 .tabh-txt1 em {
     border-bottom: 2px solid #a0a0a0;
@@ -276,11 +307,11 @@
     width: 150px;
     margin-left: -75px;
     bottom: -10px;
-		-webkit-transition:all 0.5s ease-in-out;
-	  -o-transition:all 0.5s ease-in-out;
-	  -ms-transition:all 0.5s ease-in-out;
-	  -moz-transition:all 0.5s ease-in-out;
-	  transition:all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 .tabh-txt2 {
     color: #7f7f7f;
@@ -289,11 +320,11 @@
 .tab-h li.act .tabh-txt2, .tab-h li:hover .tabh-txt2 {
     color: #ff1600;
     font-size: 20px;
-		-webkit-transition:all 0.5s ease-in-out;
-	  -o-transition:all 0.5s ease-in-out;
-	  -ms-transition:all 0.5s ease-in-out;
-	  -moz-transition:all 0.5s ease-in-out;
-	  transition:all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 .tab-h-narrow {
     filter: progid: DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#7F000000', EndColorStr='#7F000000');
@@ -322,31 +353,30 @@
     text-align: center;
     cursor: pointer;
 }
-.tab-h-narrow ul li .ico-tab {
-    background: url(../images/mod2_ico_s.png) no-repeat;
+.tab-h-narrow ul li .icon-font {
     display: inline-block;
-    height: 50px;
-    width: 50px;
-    margin: 5px 5px 0 0;
-    vertical-align: top;
+    color: #bbb;
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
-.tab-h-narrow ul li .ico-t1 {
-    background-position: 10px 10px;
-}
-.tab-h-narrow ul li .ico-t2 {
-    background-position: -54px 8px;
-}
-.tab-h-narrow ul li .ico-t3 {
-    background-position: -129px 10px;
-}
-.tab-h-narrow ul li.act .ico-t1, .tab-h-narrow ul li:hover .ico-t1 {
-    background-position: 0 -62px;
-}
-.tab-h-narrow ul li.act .ico-t2, .tab-h-narrow ul li:hover .ico-t2 {
-    background-position: -84px -61px;
-}
-.tab-h-narrow ul li.act .ico-t3, .tab-h-narrow ul li:hover .ico-t3 {
-    background-position: -168px -58px;
+.tab-h-narrow ul li.act .icon-font, .tab-h-narrow ul li:hover .icon-font {
+    color: #e84c3d;
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 .tab-h-narrow ul li .tabh-txt1 {
     font-size: 16px;
@@ -356,15 +386,20 @@
     line-height: 50px;
     margin: 5px 0 0;
     vertical-align: middle;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 .tab-h-narrow ul li.act .tabh-txt1, .tab-h-narrow ul li:hover .tabh-txt1 {
     color: #ff1600;
     font-size: 22px;
-		-webkit-transition:all 0.5s ease-in-out;
-	  -o-transition:all 0.5s ease-in-out;
-	  -ms-transition:all 0.5s ease-in-out;
-	  -moz-transition:all 0.5s ease-in-out;
-	  transition:all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 /*mod3*/
@@ -379,7 +414,7 @@
     position: absolute;
     top: 50%;
     left: 0;
-	z-index: 20;
+    z-index: 20;
 }
 .menu li {
     margin-bottom: 5px;
@@ -621,10 +656,10 @@
 .mod6-h {
     background: url(../images/mod6_title.png) center bottom no-repeat;
     height: 120px;
-    padding: 60px 0;
+    padding: 60px 0 20px;
 }
 .mod6-wrap {
-    padding: 30px 0;
+    padding: 70px 0 20px;
 }
 .mod6-l {
     float: left;
@@ -1077,7 +1112,7 @@
 .dock a.switch.off {
     background-position: -32px -640px;
 }
-@media screen and (max-width:1281px) and (max-height:801px) {
+@media screen and (max-width:1367px) and (max-height:801px) {
     .mod1-con {
         top: 16%;
     }
