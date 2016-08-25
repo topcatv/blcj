@@ -1,0 +1,8 @@
+dev:
+  image: node
+  entrypoint: "sh /code/start.sh"
+  working_dir: /code
+  volumes: 
+    - .:/code
+  ports: 
+    - 8080:8080
