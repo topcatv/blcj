@@ -1,9 +1,7 @@
 import '../css/common.css'
 import '../css/front.css'
 import 'babel-polyfill'
-import 'lightslider/dist/css/lightslider.min.css'
 import $ from 'jquery';
-import 'imports?jQuery=jquery!lightslider';
 import 'animate.css'
 import animateCss from 'animate.css-js'
 import './scroll.page'
@@ -13,18 +11,6 @@ $(function() {
   $('.m1-pop').height(screenHeight - 100)
   $('body').css('overflow', 'hidden')
 })
-
-$(".light-slider").lightSlider({
-    auto: true,
-    loop: true,
-    controls: false,
-    pauseOnHover: true,
-    autoWidth: true,
-    adaptiveHeight: true,
-    pager: false,
-    speed: 1000,
-    slideMargin: 0
-});
 
 const downloadIcon = (icon, dialog) => {
     icon.on('click', (e) => {

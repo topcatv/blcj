@@ -1,7 +1,10 @@
 import WheelSwipe from 'wheel-swipe'
-import $ from 'jquery'
+import 'lightslider/dist/css/lightslider.min.css'
+import $ from 'jquery';
+import 'imports?jQuery=jquery!lightslider';
 import HashChange from 'hashchange'
 import animateCss from 'animate.css-js'
+// import _ from 'lodash'
 
 new WheelSwipe()
 let position = 0
@@ -10,6 +13,60 @@ let mod4Position = 0
 let mod7Position = 0
 let mod8Position = 0
 const sections = $('.section')
+$(".light-slider").lightSlider({
+    auto: true,
+    loop: true,
+    controls: false,
+    pauseOnHover: true,
+    autoWidth: true,
+    adaptiveHeight: true,
+    pager: false,
+    speed: 1000,
+    slideMargin: 0
+});
+
+const m1slider = $(".mod8-m1 > ul").lightSlider({
+    auto: true,
+    loop: true,
+    controls: false,
+    pauseOnHover: false,
+    autoWidth: true,
+    adaptiveHeight: true,
+    pager: false,
+    speed: 3000,
+    pause: 6000,
+    slideMargin: 0
+});
+const m2slider = $(".mod8-m2 > ul").lightSlider({
+    auto: false,
+    loop: true,
+    controls: false,
+    pauseOnHover: false,
+    autoWidth: true,
+    adaptiveHeight: true,
+    pager: false,
+    speed: 3000,
+    pause: 6000,
+    slideMargin: 0,
+    onSliderLoad: (el) => {
+      $('.mod8-m2').hide()
+    }
+});
+const m3slider = $(".mod8-m3 > ul").lightSlider({
+    auto: false,
+    loop: true,
+    controls: false,
+    pauseOnHover: false,
+    autoWidth: true,
+    adaptiveHeight: true,
+    pager: false,
+    speed: 3000,
+    pause: 6000,
+    slideMargin: 0,
+    onSliderLoad: (el) => {
+      $('.mod8-m3').hide()
+    }
+});
 
 $('.d-up').on('click', (e) => {
     $('html, body').stop().animate({
@@ -117,7 +174,6 @@ $('.mod4 .mn li a').on('click', function (e) {
 
 $('.mod7 > .menu > li > a').on('click', function (e) {
     e.preventDefault()
-    console.log('aaaaa');
     let index = $(e.currentTarget).data('index')
     let currentPos = Number.parseInt(mod7Position)
     $('.mod7 .menu li').removeClass('cur')
@@ -156,7 +212,28 @@ $('.mod8 .mod8-title a').on('mouseover', function (e) {
                 animateCss.animate($(`.mod8-m${index}`).get(0), {
                     animationName: 'fadeInLeft',
                     duration: 500,
-                    callbacks: []
+                    callbacks: [
+                      () => {
+                        switch (index) {
+                          case 1:
+                            m1slider.play()
+                            m2slider.pause()
+                            m3slider.pause()
+                            break;
+                          case 2:
+                            m2slider.play()
+                            m1slider.pause()
+                            m3slider.pause()
+                            break;
+                          case 3:
+                            m3slider.play()
+                            m2slider.pause()
+                            m1slider.pause()
+                            break;
+                          default:
+                        }
+                      }
+                    ]
                 })
             }
         ]
@@ -167,8 +244,6 @@ $('.mod8 .mod8-title a').on('mouseover', function (e) {
 $('.mod4-m1').show()
 $('.mod7-m2').hide()
 $('.mod7-m3').hide()
-$('.mod8-m2').hide()
-$('.mod8-m3').hide()
 
 function go(pos) {
     $('html, body').stop().animate({
@@ -566,7 +641,9 @@ function mod8next() {
                     animationName: 'fadeInLeft',
                     duration: 500,
                     callbacks: [function () {
-
+                      m1slider.play()
+                      m2slider.play()
+                      m3slider.pause()
                     }]
                 })
             }]
@@ -585,7 +662,9 @@ function mod8next() {
                     animationName: 'fadeInLeft',
                     duration: 500,
                     callbacks: [function () {
-
+                      m1slider.pause()
+                      m2slider.pause()
+                      m3slider.play()
                     }]
                 })
             }]
@@ -612,7 +691,9 @@ function mod8pre() {
                     animationName: 'fadeInRight',
                     duration: 500,
                     callbacks: [function () {
-
+                      m1slider.play()
+                      m2slider.pause()
+                      m3slider.pause()
                     }]
                 })
             }]
@@ -631,7 +712,9 @@ function mod8pre() {
                     animationName: 'fadeInRight',
                     duration: 500,
                     callbacks: [function () {
-
+                      m1slider.pause()
+                      m2slider.play()
+                      m3slider.pause()
                     }]
                 })
             }]
