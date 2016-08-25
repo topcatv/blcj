@@ -13,9 +13,9 @@ label,summary{cursor:default;}
 a,button{cursor:pointer;}
 h1,h2,h3,h4,h5,h6{font-weight:400;}
 del,ins,u,s,a,a:hover{text-decoration:none;}
-body,textarea,input,button,select,keygen,legend{font:12px/1.5 "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","微软雅黑",tahoma,simsun,"宋体";color:#333;outline:0;}
+body,textarea,input,button,select,keygen,legend{font:12px/1.5 "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Microsoft YaHei",tahoma,simsun,"SimSun";color:#333;outline:0;}
 body{background:#fff;}
-a{color:#333;font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","微软雅黑",tahoma,simsun,"宋体";}
+a{color:#333;font-family:"Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Microsoft YaHei",tahoma,simsun,"SimSun";}
 i,em{font-style:normal;}
 
 /*字体图标*/

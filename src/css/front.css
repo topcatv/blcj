@@ -150,21 +150,20 @@
     -ms-transition: all .3s;
     -o-transition: all .3s;
 }
-.down-app a.android i {
-    background: url(../images/code1.jpg) center top no-repeat;
-    background-size: 100% 100%;
+.down-app a img {
+	width: 70px;
+	height: 70px;
+	margin: 9px;
+	transition: all ease .3s;
+	-webkit-transition: all ease .3s;
+	-moz-transition: all ease .3s;
+	-ms-transition: all ease .3s;
+	-o-transition: all ease .3s
 }
-.down-app a.iphone i {
-    background: url(../images/code2.jpg) center top no-repeat;
-    background-size: 100% 100%;
-}
-.down-app a i {
-    display: inline-block;
-    width: 88px;
-    height: 88px;
-}
-.down-app a:hover {
-    opacity: 0.8;
+.down-app a:hover img {
+	width: 88px;
+	height: 88px;
+	margin: 0
 }
 .m1-pop {
     filter: progid: DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#99000000', EndColorStr='#99000000');
@@ -507,7 +506,7 @@
     padding-left: 20px;
 }
 .tab-c1-con {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 200%;
     text-indent: 2em;
 }
@@ -734,7 +733,7 @@
 }
 .mod6-txt p {
     font-size: 15px;
-    font-family: "黑体";
+    font-family: "SimHei";
     height: 45px;
     line-height: 1.6;
     text-indent: 2em;
@@ -934,7 +933,7 @@
 }
 .foot {
     background: #202020;
-    height: 80px;
+    height: 90px;
     width: 100%;
     min-width: 1200px;
     position: absolute;
@@ -943,28 +942,37 @@
     right: 0;
 }
 .follow {
-    background: url(../images/ico_follow.png) 0 30px no-repeat;
-    float: left;
-    height: 20px;
-    width: 110px;
-    padding-top: 30px;
+	float:left;
+	height:70px;
+	width:300px;
+	padding-top:5px
 }
 .follow a {
-    display: inline-block;
-    height: 20px;
-    width: 20px;
+	display:inline-block;
+	height:80px;
+	width:80px;
+	margin:0 5px;
 }
-.follow a.dh {
-    margin-left: 27px;
+.follow a img {
+	height: 60px;
+	width: 60px;
+	margin: 10px;
+	transition: all .3s ease 0s;
+	-webkit-transition: all .3s ease 0s;
+	-moz-transition: all .3s ease 0s;
+	-ms-transition: all .3s ease 0s;
+	-o-transition: all .3s ease 0s
 }
-.follow a.qq {
-    margin-left: 17px;
+.follow a:hover img {
+	height: 80px;
+	width: 80px;
+	margin: 0
 }
 .ft-r {
     color: #fff;
     font-size: 14px;
     float: right;
-    width: 70%;
+    width: 50%;
     padding-top: 28px;
     text-align: right;
 }
@@ -1162,6 +1170,9 @@
         font-size: 14px;
         padding: 20px 18%;
     }
+	.tab-c1-con {
+		font-size: 16px;
+	}
     .tab-con2-info {
         height: 440px;
     }
@@ -1288,13 +1299,6 @@
     }
     .mod9-txt {
         margin-top: 70px;
-    }
-    .foot {
-        height: 60px;
-    }
-    .follow {
-        background-position: 0 20px;
-        padding-top: 20px;
     }
     .ft-r {
         padding-top: 18px;

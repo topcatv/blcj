@@ -29,24 +29,24 @@ const m1slider = $(".mod8-m1 > ul").lightSlider({
     auto: true,
     loop: true,
     controls: false,
-    pauseOnHover: false,
+    pauseOnHover: true,
     autoWidth: true,
     adaptiveHeight: true,
     pager: false,
-    speed: 3000,
-    pause: 6000,
+    speed: 6000,
+    pause: 12000,
     slideMargin: 0
 });
 const m2slider = $(".mod8-m2 > ul").lightSlider({
     auto: false,
     loop: true,
     controls: false,
-    pauseOnHover: false,
+    pauseOnHover: true,
     autoWidth: true,
     adaptiveHeight: true,
     pager: false,
-    speed: 3000,
-    pause: 6000,
+    speed: 6000,
+    pause: 12000,
     slideMargin: 0,
     onSliderLoad: (el) => {
       $('.mod8-m2').hide()
@@ -56,12 +56,12 @@ const m3slider = $(".mod8-m3 > ul").lightSlider({
     auto: false,
     loop: true,
     controls: false,
-    pauseOnHover: false,
+    pauseOnHover: true,
     autoWidth: true,
     adaptiveHeight: true,
     pager: false,
-    speed: 3000,
-    pause: 6000,
+    speed: 6000,
+    pause: 12000,
     slideMargin: 0,
     onSliderLoad: (el) => {
       $('.mod8-m3').hide()
