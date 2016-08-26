@@ -868,14 +868,8 @@
     width: 100%;
     min-width: 1200px;
 }
-.mod8-m ul li {
-  min-width: 1200px;
-  min-height: 528px;
-}
 .mod8-m img {
     width: 100%;
-    min-width: 1200px;
-    min-height: 528px;
     height: auto;
 }
 

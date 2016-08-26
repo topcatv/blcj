@@ -4,7 +4,7 @@ import $ from 'jquery';
 import 'imports?jQuery=jquery!lightslider';
 import HashChange from 'hashchange'
 import animateCss from 'animate.css-js'
-// import _ from 'lodash'
+import _ from 'lodash'
 
 new WheelSwipe()
 let position = 0
@@ -13,6 +13,7 @@ let mod4Position = 0
 let mod7Position = 0
 let mod8Position = 0
 const sections = $('.section')
+$('.mod8-m img').css("width", `${screen.width}px`)
 $(".light-slider").lightSlider({
     auto: true,
     loop: true,
@@ -27,41 +28,44 @@ $(".light-slider").lightSlider({
 
 const m1slider = $(".mod8-m1 > ul").lightSlider({
     auto: true,
+    mode: 'fade',
     loop: true,
-    controls: false,
     pauseOnHover: true,
+    controls: false,
     autoWidth: true,
     adaptiveHeight: true,
     pager: false,
-    speed: 6000,
-    pause: 12000,
+    speed: 4000,
+    pause: 8000,
     slideMargin: 0
 });
 const m2slider = $(".mod8-m2 > ul").lightSlider({
-    auto: false,
+    auto: true,
+    mode: 'fade',
     loop: true,
-    controls: false,
     pauseOnHover: true,
+    controls: false,
     autoWidth: true,
     adaptiveHeight: true,
     pager: false,
-    speed: 6000,
-    pause: 12000,
+    speed: 4000,
+    pause: 8000,
     slideMargin: 0,
     onSliderLoad: (el) => {
       $('.mod8-m2').hide()
     }
 });
 const m3slider = $(".mod8-m3 > ul").lightSlider({
-    auto: false,
+    auto: true,
+    mode: 'fade',
     loop: true,
-    controls: false,
     pauseOnHover: true,
+    controls: false,
     autoWidth: true,
     adaptiveHeight: true,
     pager: false,
-    speed: 6000,
-    pause: 12000,
+    speed: 4000,
+    pause: 8000,
     slideMargin: 0,
     onSliderLoad: (el) => {
       $('.mod8-m3').hide()
@@ -198,35 +202,38 @@ $('.mod7 > .menu > li > a').on('click', function (e) {
 })
 $('.mod8 .mod8-title a').on('mouseover', function (e) {
     e.preventDefault()
+    m1slider.pause()
+    m2slider.pause()
+    m3slider.pause()
     let index = $(e.currentTarget).data('index')
     let currentPos = Number.parseInt(mod8Position)
     $('.mod8 .mod8-title a').removeClass('act')
     $(`.mod8 .mod8-title a:eq(${index-1})`).addClass('act')
     animateCss.animate($(`.mod8-m${currentPos+1}`).get(0), {
-        animationName: 'fadeOutRight',
-        duration: 500,
+        animationName: 'fadeOut',
+        duration: 800,
         callbacks: [
             function () {
                 $(`.mod8-m${currentPos+1}`).hide()
                 $(`.mod8-m${index}`).show()
                 animateCss.animate($(`.mod8-m${index}`).get(0), {
-                    animationName: 'fadeInLeft',
-                    duration: 500,
+                    animationName: 'fadeIn',
+                    duration: 2500,
                     callbacks: [
                       () => {
                         switch (index) {
                           case 1:
-                            m1slider.play()
+                            _.delay(() => m1slider.play(), 1500);
                             m2slider.pause()
                             m3slider.pause()
                             break;
                           case 2:
-                            m2slider.play()
+                            _.delay(() => m2slider.play(), 1500);
                             m1slider.pause()
                             m3slider.pause()
                             break;
                           case 3:
-                            m3slider.play()
+                            _.delay(() => m3slider.play(), 1500);
                             m2slider.pause()
                             m1slider.pause()
                             break;
