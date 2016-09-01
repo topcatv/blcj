@@ -1,17 +1,21 @@
 import WheelSwipe from 'wheel-swipe'
+import Modernizr from 'modernizr'
 import 'lightslider/dist/css/lightslider.min.css'
 import $ from 'jquery';
 import 'imports?jQuery=jquery!lightslider';
 import HashChange from 'hashchange'
-import animateCss from 'animate.css-js'
+import animateCss from './ie8anime'
 import _ from 'lodash'
 
-new WheelSwipe()
+if (Modernizr.cssanimations) {
+    new WheelSwipe()
+}
 let position = 0
 let mod3Position = 0
 let mod4Position = 0
 let mod7Position = 0
 let mod8Position = 0
+let canScroll = true
 const sections = $('.section')
 $('.mod8-m img').css("width", `${screen.width}px`)
 $(".light-slider").lightSlider({
@@ -52,7 +56,7 @@ const m2slider = $(".mod8-m2 > ul").lightSlider({
     pause: 8000,
     slideMargin: 0,
     onSliderLoad: (el) => {
-      $('.mod8-m2').hide()
+        $('.mod8-m2').hide()
     }
 });
 const m3slider = $(".mod8-m3 > ul").lightSlider({
@@ -68,7 +72,7 @@ const m3slider = $(".mod8-m3 > ul").lightSlider({
     pause: 8000,
     slideMargin: 0,
     onSliderLoad: (el) => {
-      $('.mod8-m3').hide()
+        $('.mod8-m3').hide()
     }
 });
 
@@ -92,17 +96,46 @@ HashChange.update(function (hash) {
     }
 })
 
-window.addEventListener('wheelup', function (e) {
-    e.preventDefault()
-    next()
-    HashChange.updateHash('none') // clean hash
-});
+if (Modernizr.cssanimations) {
+    window.addEventListener('wheelup', function (e) {
+        e.preventDefault()
+        next()
+        HashChange.updateHash('none') // clean hash
+    });
 
-window.addEventListener('wheeldown', function (e) {
-    e.preventDefault()
-    pre()
-    HashChange.updateHash('none') // clean hash
-});
+    window.addEventListener('wheeldown', function (e) {
+        e.preventDefault()
+        pre()
+        HashChange.updateHash('none') // clean hash
+    });
+} else {
+    const wheelHandle = (dy) => {
+        if (dy >= 1) {
+            next()
+            HashChange.updateHash('none') // clean hash
+            return;
+        }
+        if (dy <= -1) {
+            pre()
+            HashChange.updateHash('none') // clean hash
+            return;
+        }
+    }
+
+    addWheelListener(document, (e) => {
+        e.preventDefault()
+        const dy = e.deltaY
+        if (Math.abs(dy) > 0) {
+            if (canScroll) {
+                canScroll = false
+                wheelHandle(dy)
+                _.delay(() => {
+                    canScroll = true
+                }, 1500)
+            }
+        }
+    })
+}
 
 $('body').on('keydown', function (e) {
     if (e.which === 40 || e.which === 39) { //down left
@@ -120,20 +153,22 @@ $('.mod3 > .menu > li > a').on('click', function (e) {
     let index = $(e.currentTarget).data('index')
     if (mod3Position === 0) {
         $('.mod3_0').hide()
-        $('.mod3_1').show()
+        if (Modernizr.cssanimations) {
+            $('.mod3_1').show()
+        }
         animateCss.animate($('.mod3_1').get(0), {
             animationName: 'fadeInLeft',
             duration: 500,
-            callbacks: [
-
-            ]
-          })
+            callbacks: []
+        })
     }
     $('.mod3 > .menu > li').removeClass('cur')
     $(`.mod3 > .menu > li:eq(${index-1})`).addClass('cur')
     $(`.mod3_${mod3Position}_1`).hide()
     $(`.mod3_${mod3Position}_2`).hide()
-    $(`.mod3_${index}_1`).show()
+    if (Modernizr.cssanimations) {
+        $(`.mod3_${index}_1`).show()
+    }
     animateCss.animate($(`.mod3_${index}_1`).get(0), {
         animationName: 'fadeIn',
         duration: 500,
@@ -163,7 +198,9 @@ $('.mod4 .mn li a').on('click', function (e) {
         callbacks: [
             function () {
                 $(`.mod4-m${currentPos+1}`).hide()
-                $(`.mod4-m${index}`).show()
+                if (Modernizr.cssanimations) {
+                    $(`.mod4-m${index}`).show()
+                }
                 animateCss.animate($(`.mod4-m${index}`).get(0), {
                     animationName: 'fadeInLeft',
                     duration: 500,
@@ -188,7 +225,9 @@ $('.mod7 > .menu > li > a').on('click', function (e) {
         callbacks: [
             function () {
                 $(`.mod7-m${currentPos+1}`).hide()
-                $(`.mod7-m${index}`).show()
+                if (Modernizr.cssanimations) {
+                    $(`.mod7-m${index}`).show()
+                }
                 animateCss.animate($(`.mod7-m${index}`).get(0), {
                     animationName: 'fadeInLeft',
                     duration: 500,
@@ -215,31 +254,33 @@ $('.mod8 .mod8-title a').on('mouseover', function (e) {
         callbacks: [
             function () {
                 $(`.mod8-m${currentPos+1}`).hide()
-                $(`.mod8-m${index}`).show()
+                if (Modernizr.cssanimations) {
+                    $(`.mod8-m${index}`).show()
+                }
                 animateCss.animate($(`.mod8-m${index}`).get(0), {
                     animationName: 'fadeIn',
                     duration: 2500,
                     callbacks: [
-                      () => {
-                        switch (index) {
-                          case 1:
-                            _.delay(() => m1slider.play(), 1500);
-                            m2slider.pause()
-                            m3slider.pause()
-                            break;
-                          case 2:
-                            _.delay(() => m2slider.play(), 1500);
-                            m1slider.pause()
-                            m3slider.pause()
-                            break;
-                          case 3:
-                            _.delay(() => m3slider.play(), 1500);
-                            m2slider.pause()
-                            m1slider.pause()
-                            break;
-                          default:
+                        () => {
+                            switch (index) {
+                                case 1:
+                                    _.delay(() => m1slider.play(), 1500);
+                                    m2slider.pause()
+                                    m3slider.pause()
+                                    break;
+                                case 2:
+                                    _.delay(() => m2slider.play(), 1500);
+                                    m1slider.pause()
+                                    m3slider.pause()
+                                    break;
+                                case 3:
+                                    _.delay(() => m3slider.play(), 1500);
+                                    m2slider.pause()
+                                    m1slider.pause()
+                                    break;
+                                default:
+                            }
                         }
-                      }
                     ]
                 })
             }
@@ -312,27 +353,33 @@ function mod3next() {
         $('.mod3 .menu li').removeClass('cur')
         $('.mod3 .menu li:eq(0)').addClass('cur')
         $('.mod3_0').hide()
-        $('.mod3_1').show()
+        if (Modernizr.cssanimations) {
+            $('.mod3_1').show()
+        }
         animateCss.animate($('.mod3_1').get(0), {
             animationName: 'fadeInLeft',
             duration: 500,
             callbacks: [
                 function () {
-                  $('.mod3_1_1').show()
-                  animateCss.animate($('.mod3_1_1').get(0), {
-                      animationName: 'fadeIn',
-                      duration: 300,
-                      callbacks: [
-                          function () {
-                              $('.mod3_1_2').show()
-                              animateCss.animate($('.mod3_1_2').get(0), {
-                                  animationName: 'fadeInUp',
-                                  duration: 500,
-                                  callbacks: []
-                              })
-                          }
-                      ]
-                  })
+                    if (Modernizr.cssanimations) {
+                        $('.mod3_1_1').show()
+                    }
+                    animateCss.animate($('.mod3_1_1').get(0), {
+                        animationName: 'fadeIn',
+                        duration: 300,
+                        callbacks: [
+                            function () {
+                                if (Modernizr.cssanimations) {
+                                    $('.mod3_1_2').show()
+                                }
+                                animateCss.animate($('.mod3_1_2').get(0), {
+                                    animationName: 'fadeInUp',
+                                    duration: 500,
+                                    callbacks: []
+                                })
+                            }
+                        ]
+                    })
                 }
             ]
         })
@@ -342,13 +389,17 @@ function mod3next() {
         $('.mod3 > .menu > li:eq(1)').addClass('cur')
         $('.mod3_1_1').hide()
         $('.mod3_1_2').hide()
-        $('.mod3_2_1').show()
+        if (Modernizr.cssanimations) {
+            $('.mod3_2_1').show()
+        }
         animateCss.animate($('.mod3_2_1').get(0), {
             animationName: 'fadeIn',
             duration: 300,
             callbacks: [
                 function () {
-                    $('.mod3_2_2').show()
+                    if (Modernizr.cssanimations) {
+                        $('.mod3_2_2').show()
+                    }
                     animateCss.animate($('.mod3_2_2').get(0), {
                         animationName: 'fadeInUp',
                         duration: 500,
@@ -363,13 +414,17 @@ function mod3next() {
         $('.mod3 > .menu > li:eq(2)').addClass('cur')
         $('.mod3_2_1').hide()
         $('.mod3_2_2').hide()
-        $('.mod3_3_1').show()
+        if (Modernizr.cssanimations) {
+            $('.mod3_3_1').show()
+        }
         animateCss.animate($('.mod3_3_1').get(0), {
             animationName: 'fadeIn',
             duration: 300,
             callbacks: [
                 function () {
-                    $('.mod3_3_2').show()
+                    if (Modernizr.cssanimations) {
+                        $('.mod3_3_2').show()
+                    }
                     animateCss.animate($('.mod3_3_2').get(0), {
                         animationName: 'fadeInUp',
                         duration: 500,
@@ -406,13 +461,17 @@ function mod3pre() {
         $('.mod3 > .menu > li:eq(0)').addClass('cur')
         $('.mod3_2_1').hide()
         $('.mod3_2_2').hide()
-        $('.mod3_1_1').show()
+        if (Modernizr.cssanimations) {
+            $('.mod3_1_1').show()
+        }
         animateCss.animate($('.mod3_1_1').get(0), {
             animationName: 'fadeIn',
             duration: 300,
             callbacks: [
                 function () {
-                    $('.mod3_1_2').show()
+                    if (Modernizr.cssanimations) {
+                        $('.mod3_1_2').show()
+                    }
                     animateCss.animate($('.mod3_1_2').get(0), {
                         animationName: 'fadeInUp',
                         duration: 500,
@@ -427,13 +486,17 @@ function mod3pre() {
         $('.mod3 > .menu > li:eq(1)').addClass('cur')
         $('.mod3_3_1').hide()
         $('.mod3_3_2').hide()
-        $('.mod3_2_1').show()
+        if (Modernizr.cssanimations) {
+            $('.mod3_2_1').show()
+        }
         animateCss.animate($('.mod3_2_1').get(0), {
             animationName: 'fadeIn',
             duration: 300,
             callbacks: [
                 function () {
-                    $('.mod3_2_2').show()
+                    if (Modernizr.cssanimations) {
+                        $('.mod3_2_2').show()
+                    }
                     animateCss.animate($('.mod3_2_2').get(0), {
                         animationName: 'fadeInUp',
                         duration: 500,
@@ -459,7 +522,9 @@ function mod4next() {
             duration: 500,
             callbacks: [function () {
                 $('.mod4-m1').hide()
-                $('.mod4-m2').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod4-m2').show()
+                }
                 animateCss.animate($('.mod4-m2').get(0), {
                     animationName: 'fadeInLeft',
                     duration: 500,
@@ -478,7 +543,9 @@ function mod4next() {
             duration: 500,
             callbacks: [function () {
                 $('.mod4-m2').hide()
-                $('.mod4-m3').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod4-m3').show()
+                }
                 animateCss.animate($('.mod4-m3').get(0), {
                     animationName: 'fadeInLeft',
                     duration: 500,
@@ -505,7 +572,9 @@ function mod4pre() {
             duration: 500,
             callbacks: [function () {
                 $('.mod4-m2').hide()
-                $('.mod4-m1').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod4-m1').show()
+                }
                 animateCss.animate($('.mod4-m1').get(0), {
                     animationName: 'fadeInRight',
                     duration: 500,
@@ -523,8 +592,10 @@ function mod4pre() {
             animationName: 'fadeOutLeft',
             duration: 500,
             callbacks: [function () {
-                $('.mod4-m3').hide()
-                $('.mod4-m2').show()
+                $('.mod4-m3').hide
+                if (Modernizr.cssanimations) {
+                    $('.mod4-m2').show()
+                }
                 animateCss.animate($('.mod4-m2').get(0), {
                     animationName: 'fadeInRight',
                     duration: 500,
@@ -551,7 +622,9 @@ function mod7next() {
             duration: 500,
             callbacks: [function () {
                 $('.mod7-m1').hide()
-                $('.mod7-m2').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod7-m2').show()
+                }
                 animateCss.animate($('.mod7-m2').get(0), {
                     animationName: 'fadeInLeft',
                     duration: 500,
@@ -570,7 +643,9 @@ function mod7next() {
             duration: 500,
             callbacks: [function () {
                 $('.mod7-m2').hide()
-                $('.mod7-m3').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod7-m3').show()
+                }
                 animateCss.animate($('.mod7-m3').get(0), {
                     animationName: 'fadeInLeft',
                     duration: 500,
@@ -597,7 +672,9 @@ function mod7pre() {
             duration: 500,
             callbacks: [function () {
                 $('.mod7-m2').hide()
-                $('.mod7-m1').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod7-m1').show()
+                }
                 animateCss.animate($('.mod7-m1').get(0), {
                     animationName: 'fadeInRight',
                     duration: 500,
@@ -616,7 +693,9 @@ function mod7pre() {
             duration: 500,
             callbacks: [function () {
                 $('.mod7-m3').hide()
-                $('.mod7-m2').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod7-m2').show()
+                }
                 animateCss.animate($('.mod7-m2').get(0), {
                     animationName: 'fadeInRight',
                     duration: 500,
@@ -643,14 +722,16 @@ function mod8next() {
             duration: 500,
             callbacks: [function () {
                 $('.mod8-m1').hide()
-                $('.mod8-m2').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod8-m2').show()
+                }
                 animateCss.animate($('.mod8-m2').get(0), {
                     animationName: 'fadeInLeft',
                     duration: 500,
                     callbacks: [function () {
-                      m1slider.play()
-                      m2slider.play()
-                      m3slider.pause()
+                        m1slider.play()
+                        m2slider.play()
+                        m3slider.pause()
                     }]
                 })
             }]
@@ -664,14 +745,16 @@ function mod8next() {
             duration: 500,
             callbacks: [function () {
                 $('.mod8-m2').hide()
-                $('.mod8-m3').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod8-m3').show()
+                }
                 animateCss.animate($('.mod8-m3').get(0), {
                     animationName: 'fadeInLeft',
                     duration: 500,
                     callbacks: [function () {
-                      m1slider.pause()
-                      m2slider.pause()
-                      m3slider.play()
+                        m1slider.pause()
+                        m2slider.pause()
+                        m3slider.play()
                     }]
                 })
             }]
@@ -693,14 +776,16 @@ function mod8pre() {
             duration: 500,
             callbacks: [function () {
                 $('.mod8-m2').hide()
-                $('.mod8-m1').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod8-m1').show()
+                }
                 animateCss.animate($('.mod8-m1').get(0), {
                     animationName: 'fadeInRight',
                     duration: 500,
                     callbacks: [function () {
-                      m1slider.play()
-                      m2slider.pause()
-                      m3slider.pause()
+                        m1slider.play()
+                        m2slider.pause()
+                        m3slider.pause()
                     }]
                 })
             }]
@@ -714,14 +799,16 @@ function mod8pre() {
             duration: 500,
             callbacks: [function () {
                 $('.mod8-m3').hide()
-                $('.mod8-m2').show()
+                if (Modernizr.cssanimations) {
+                    $('.mod8-m2').show()
+                }
                 animateCss.animate($('.mod8-m2').get(0), {
                     animationName: 'fadeInRight',
                     duration: 500,
                     callbacks: [function () {
-                      m1slider.pause()
-                      m2slider.play()
-                      m3slider.pause()
+                        m1slider.pause()
+                        m2slider.play()
+                        m3slider.pause()
                     }]
                 })
             }]

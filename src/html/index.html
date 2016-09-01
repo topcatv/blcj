@@ -7,8 +7,113 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>首页-博览财经</title>
 	<!--[if lt IE 9]>
-    	<link rel="stylesheet" type="text/css" href="../css/ie.css">
+		<script src="//cdn.bootcss.com/es5-shim/4.5.9/es5-shim.min.js"></script>
+		<script src="//cdn.bootcss.com/es5-shim/4.5.9/es5-sham.min.js"></script>
+		<script src="//cdn.bootcss.com/console-polyfill/0.2.2/index.min.js"></script>
+		<script src="//cdn.bootcss.com/json3/3.3.2/json3.min.js"></script>
+		<script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+		<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		<script>
+			!window.addEventListener && (function (WindowPrototype, DocumentPrototype, ElementPrototype, addEventListener, removeEventListener, dispatchEvent, registry) {
+				WindowPrototype[addEventListener] = DocumentPrototype[addEventListener] = ElementPrototype[addEventListener] = function (type, listener) {
+					var target = this;
+
+					registry.unshift([target, type, listener, function (event) {
+						var eventCopy = {};
+						for (var i in event) {
+						    eventCopy[i] = event[i];
+						}
+						eventCopy.currentTarget = target;
+						eventCopy.preventDefault = function () { eventCopy.returnValue = false };
+						eventCopy.stopPropagation = function () { eventCopy.cancelBubble = true };
+						eventCopy.target = event.srcElement || target;
+
+						listener.call(target, eventCopy);
+					}]);
+
+					this.attachEvent("on" + type, registry[0][3]);
+				};
+
+				WindowPrototype[removeEventListener] = DocumentPrototype[removeEventListener] = ElementPrototype[removeEventListener] = function (type, listener) {
+					for (var index = 0, register; register = registry[index]; ++index) {
+						if (register[0] == this && register[1] == type && register[2] == listener) {
+							return this.detachEvent("on" + type, registry.splice(index, 1)[0][3]);
+						}
+					}
+				};
+
+				WindowPrototype[dispatchEvent] = DocumentPrototype[dispatchEvent] = ElementPrototype[dispatchEvent] = function (eventObject) {
+					return this.fireEvent("on" + eventObject.type, eventObject);
+				};
+			})(Window.prototype, HTMLDocument.prototype, Element.prototype, "addEventListener", "removeEventListener", "dispatchEvent", []);
+			// creates a global "addWheelListener" method
+			// example: addWheelListener( elem, function( e ) { console.log( e.deltaY ); e.preventDefault(); } );
+			(function (window, document) {
+			    var prefix = "",
+			        _addEventListener, support;
+
+			    // detect event model
+			    if (window.addEventListener) {
+			        _addEventListener = "addEventListener";
+			    } else {
+			        _addEventListener = "attachEvent";
+			        prefix = "on";
+			    }
+
+			    // detect available wheel event
+			    support = "onwheel" in document.createElement("div") ? "wheel" : // Modern browsers support "wheel"
+			        document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
+			        "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
+			    window.addWheelListener = function (elem, callback, useCapture) {
+			        _addWheelListener(elem, support, callback, useCapture);
+
+			        // handle MozMousePixelScroll in older Firefox
+			        if (support == "DOMMouseScroll") {
+			            _addWheelListener(elem, "MozMousePixelScroll", callback, useCapture);
+			        }
+			    };
+
+			    function _addWheelListener(elem, eventName, callback, useCapture) {
+
+			        elem[_addEventListener](prefix + eventName, support == "wheel" ? callback : function (originalEvent) {
+			            !originalEvent && (originalEvent = window.event);
+
+			            // create a normalized event object
+			            var event = {
+			                // keep a ref to the original event object
+			                originalEvent: originalEvent,
+			                target: originalEvent.target || originalEvent.srcElement,
+			                type: "wheel",
+			                deltaMode: originalEvent.type == "MozMousePixelScroll" ? 0 : 1,
+			                deltaX: 0,
+			                deltaY: 0,
+			                deltaZ: 0,
+			                preventDefault: function () {
+			                    originalEvent.preventDefault ?
+			                        originalEvent.preventDefault() :
+			                        originalEvent.returnValue = false;
+			                }
+			            };
+
+			            // calculate deltaY (and deltaX) according to the event
+			            if (support == "mousewheel") {
+			                event.deltaY = -1 / 40 * originalEvent.wheelDelta;
+			                // Webkit also support wheelDeltaX
+			                originalEvent.wheelDeltaX && (event.deltaX = -1 / 40 * originalEvent.wheelDeltaX);
+			            } else {
+			                event.deltaY = originalEvent.detail;
+			            }
+
+			            // it's time to fire the callback
+			            return callback(event);
+
+			        }, useCapture || false);
+			    }
+			})(window, document);
+			</script>
 	<![endif]-->
+
+</head>
 
 <body>
 	<div id="fullpage">
@@ -33,18 +138,18 @@
 				<div class="mod1-bt">
 					<div class="wrap clearfix">
 						<div class="down-pc">
-                        	<a class="pc" href=""><i></i>PC下载</a>
+              <a class="pc" href="#none"><i></i>PC下载</a>
 							<span>从中央部委领导到机构投资者，每天<em>必看的终端！</em></span>
 						</div>
 						<div class="down-app">
-							<a class="android" href=""><img src="../images/code1.jpg" alt="" /><br>Android下载</a>
-							<a class="iphone" href=""><img src="../images/code2.jpg" alt="" />iPhone下载</a>
+							<a class="android" href="#none"><img src="../images/code1.jpg" alt="" /><br>Android下载</a>
+							<a class="iphone" href="#none"><img src="../images/code2.jpg" alt="" />iPhone下载</a>
 						</div>
 					</div>
 				</div>
 				<!--PC下载弹窗,高度js控制-->
 				<div id="pc_download" class="m1-pop pop1" style="display:none;">
-					<a class="close" href=""></a>
+					<a class="close" href="#none"></a>
 					<div class="m1-pop-c">
 						<img src="../images/pc_ico.jpg" alt="" />
 						<a class="down-btn" href="">XP版下载</a>
@@ -53,7 +158,7 @@
 				</div>
 				<!--Android下载弹窗,高度js控制-->
 				<div id="android_download" class="m1-pop pop2" style="display:none;">
-					<a class="close" href=""></a>
+					<a class="close" href="#none"></a>
 					<div class="m1-pop-c">
 						<img src="../images/code1.jpg" alt="" />
 						<a class="down-btn" href="">Android下载</a>
@@ -61,7 +166,7 @@
 				</div>
 				<!--iPhone下载弹窗,高度js控制-->
 				<div id="ios_download" class="m1-pop pop2" style="display:none;">
-					<a class="close" href=""></a>
+					<a class="close" href="#none"></a>
 					<div class="m1-pop-c">
 						<img src="../images/code2.jpg" alt="" />
 						<a class="down-btn" href="">iPhone下载</a>
@@ -111,9 +216,9 @@
 		</div>
 		<div class="mod mod3 section">
 			<ul class="menu">
-				<li><a href="" data-index="1">高层决策参考</a></li>
-				<li><a href="" data-index="2">中国首席财经</a></li>
-				<li><a href="" data-index="3">首席证券内参</a></li>
+				<li><a href="#none" data-index="1">高层决策参考</a></li>
+				<li><a href="#none" data-index="2">中国首席财经</a></li>
+				<li><a href="#none" data-index="3">首席证券内参</a></li>
 			</ul>
 			<div class="wrap">
 				<div class="tab-con1">
@@ -169,9 +274,9 @@
 					</div>
 					<div class="tab-con2-info">
 						<ul class="clearfix mn">
-							<li class="act"><a href="" data-index="1"><s></s>博览资讯数据库业务</a></li>
-							<li><a href="" data-index="2"><s></s>微信资讯+功能开发业务</a></li>
-							<li><a href="" data-index="3"><s></s>资讯定制外包业务</a></li>
+							<li class="act"><a href="#none" data-index="1"><s></s>博览资讯数据库业务</a></li>
+							<li><a href="#none" data-index="2"><s></s>微信资讯+功能开发业务</a></li>
+							<li><a href="#none" data-index="3"><s></s>资讯定制外包业务</a></li>
 						</ul>
 						<div class="tab-con1-main">
 							<div class="mod4-m mod4-m1"><img src="../images/mod4_img_01.png" alt="" /></div>
@@ -268,9 +373,9 @@
 		</div>
 		<div class="mod mod7 section">
 			<ul class="menu">
-				<li class="cur"><a href="" data-index="1">分级基金网</a></li>
-				<li><a href="" data-index="2">牛邦网</a></li>
-				<li><a href="" data-index="3">益合资本</a></li>
+				<li class="cur"><a href="#none" data-index="1">分级基金网</a></li>
+				<li><a href="#none" data-index="2">牛邦网</a></li>
+				<li><a href="#none" data-index="3">益合资本</a></li>
 			</ul>
 			<div class="wrap">
 				<h2 class="mod7-h"></h2>

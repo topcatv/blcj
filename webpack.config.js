@@ -1,9 +1,12 @@
 var webpack = require('webpack');
+var DashboardPlugin = require('webpack-dashboard/plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractCSS = new ExtractTextPlugin('[name].css');
+var path = require("path");
 
 var plugins = [
+    new DashboardPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     extractCSS,
@@ -14,14 +17,14 @@ var plugins = [
         hash: true, // index.js?hash
         cache: true, // if true (default) try to emit the file only if it was changed.
         showErrors: true, // if true (default) errors details will be written into the html page.
-        chunks: ['js/index'] // filter chunks
+        chunks: ['index'] // filter chunks
     })
 ];
 
 var loaders = [{
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel"
+        loaders: ["es3ify", "babel"]
     }, {
         test: /\.css$/,
         loader: extractCSS.extract('style', 'css?sourceMap')
@@ -44,13 +47,16 @@ var loaders = [{
     }, {
         test: /\.eot$/,
         loader: 'url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]'
+    }, {
+        test: /\.modernizrrc$/,
+        loader: "modernizr"
     }
 ];
 
 module.exports = {
     devtool: 'source-map',
     entry: {
-        'js/index': './src/js/index.js'
+        'index': './src/js/index.js'
     },
     output: {
         path: './build',
@@ -70,7 +76,10 @@ module.exports = {
         loaders: loaders
     },
     resolve: {
-        extensions: ['', '.js', '.json', 'coffee']
+        extensions: ['', '.js', '.json', 'coffee'],
+        alias: {
+          modernizr$: path.resolve(__dirname, ".modernizrrc")
+        }
     },
     plugins: plugins
 

@@ -49,7 +49,7 @@
     width: 132px;
 }
 .mod1-con {
-    filter: progid: DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#B2000000', EndColorStr='#B2000000');
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#B2000000', EndColorStr='#B2000000');
     background: rgba(0, 0, 0, 0.7);
     height: 360px;
     width: 890px;
@@ -81,7 +81,7 @@
     text-decoration: underline;
 }
 .mod1-bt {
-    filter: progid: DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#7F000000', EndColorStr='#7F000000');
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#7F000000', EndColorStr='#7F000000');
     background: rgba(0, 0, 0, 0.5);
     height: 135px;
     width: 100%;
@@ -166,7 +166,7 @@
 	margin: 0
 }
 .m1-pop {
-    filter: progid: DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#99000000', EndColorStr='#99000000');
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#99000000', EndColorStr='#99000000');
     background: rgba(0, 0, 0, 0.6);
     width: 1200px;
     height: 640px;
@@ -227,6 +227,7 @@
 
 .mod2 {
     background: url(../images/mod2_bg.jpg) center bottom no-repeat;
+    background-size: 100% auto;
     height: 800px;
 }
 .tab-h {
@@ -321,7 +322,7 @@
     transition: all 0.5s ease-in-out;
 }
 .tab-h-narrow {
-    filter: progid: DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#7F000000', EndColorStr='#7F000000');
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#7F000000', EndColorStr='#7F000000');
     background: rgba(0, 0, 0, 0.5);
     height: 60px;
     width: 100%;
@@ -333,7 +334,7 @@
     z-index: 99;
 }
 .mod3 .tab-h-narrow {
-    filter: progid: DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#7Fc8c8c8', EndColorStr='#7Fc8c8c8');
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#7Fc8c8c8', EndColorStr='#7Fc8c8c8');
     background: rgba(200, 200, 200, 0.5);
 }
 .tab-h-narrow ul {
@@ -414,7 +415,7 @@
     margin-bottom: 5px;
 }
 .menu li a {
-    filter: progid: DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#33ffffff', EndColorStr='#33ffffff');
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#33ffffff', EndColorStr='#33ffffff');
     background: rgba(255, 255, 255, 0.2);
     color: #bec1df;
     font-size: 24px;
@@ -515,6 +516,7 @@
 
 .mod4 {
     background: url(../images/mod4_bg.jpg) center bottom no-repeat;
+    background-size: 100% auto;
     color: #000;
     height: 900px;
 }
@@ -733,7 +735,7 @@
 }
 .mod6-txt p {
     font-size: 15px;
-    font-family: "SimHei";
+    font-family: "黑体";
     height: 45px;
     line-height: 1.6;
     text-indent: 2em;
@@ -793,7 +795,7 @@
     right: 0;
 }
 .mod7-bottom {
-    filter: progid: DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#33ffffff', EndColorStr='#33ffffff');
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#33ffffff', EndColorStr='#33ffffff');
     background: rgba(255, 255, 255, 0.2);
     color: #fff;
     height: 180px;
@@ -868,8 +870,14 @@
     width: 100%;
     min-width: 1200px;
 }
+.mod8-m ul li {
+  min-width: 1200px;
+  min-height: 528px;
+}
 .mod8-m img {
     width: 100%;
+    min-width: 1200px;
+    min-height: 528px;
     height: auto;
 }
 

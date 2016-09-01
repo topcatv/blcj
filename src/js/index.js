@@ -2,8 +2,8 @@ import '../css/common.css'
 import '../css/front.css'
 import 'babel-polyfill'
 import $ from 'jquery';
-import 'animate.css'
-import animateCss from 'animate.css-js'
+import Modernizr from 'modernizr'
+import animateCss from './ie8anime'
 import './scroll.page'
 const screenHeight = $(window).height()
 $(function() {
@@ -18,7 +18,9 @@ const downloadIcon = (icon, dialog) => {
         $('#pc_download').hide()
         $('#android_download').hide()
         $('#ios_download').hide()
-        dialog.show();
+        if(Modernizr.cssanimations){
+          dialog.show();
+        }
         animateCss.animate(dialog[0], {
             animationName: 'slideInUp',
             duration: 500,
@@ -34,7 +36,9 @@ const downloadIcon = (icon, dialog) => {
             duration: 500,
             callbacks: [
                 function () {
+                  if(Modernizr.cssanimations){
                     dialog.hide()
+                  }
                 }
             ]
         });
