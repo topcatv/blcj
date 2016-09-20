@@ -55,17 +55,25 @@ $(function () {
     function play() {
         if (Modernizr.cssanimations) {
             curVideo.play();
+            pauseButton.hide();
         }
         paused = false;
         setTimeout(() => $('#mcon').fadeOut(1500), 3000);
         $(curVideo).removeClass("stopfade");
-        pauseButton.css('background-image', ('url("../images/pause.png")'));
+        setTimeout(() => {
+          curVideo.pause()
+          paused = true
+          curVideo.src = ''
+          $(curVideo).addClass("stopfade")
+          $('#mcon').fadeIn(1500)
+          pauseButton.show()
+        }, 48000);
     }
 
     pauseButton.click(function () {
         curVideo = document.getElementById("bgvid");
         if (Modernizr.cssanimations) {
-            if ("$!isMobile" == "true" && (curVideo.src == undefined || curVideo.src == "")) {
+            if (curVideo.src == undefined || curVideo.src == "" || curVideo.src.indexOf('mp4') < 0) {
                 curVideo.src = "../video/publicize.mp4";
                 play();
             } else if (curVideo.paused) {
