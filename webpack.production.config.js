@@ -19,6 +19,10 @@ var plugins = [
         {
             from: 'src/images',
             to: 'images'
+        },
+        {
+            from: 'src/video',
+            to: 'video'
         }
     ]),
     new HtmlWebpackPlugin({

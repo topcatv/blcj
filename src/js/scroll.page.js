@@ -17,7 +17,11 @@ let mod7Position = 0
 let mod8Position = 0
 let canScroll = true
 const sections = $('.section')
-$('.mod8-m img').css("width", `${screen.width}px`)
+const size = {
+  width: window.innerWidth || document.body.clientWidth,
+  height: window.innerHeight || document.body.clientHeight
+}
+$('.mod8-m img').css("width", `${size.width}px`)
 $(".light-slider").lightSlider({
     auto: true,
     loop: true,
