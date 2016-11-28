@@ -44,7 +44,7 @@ var loaders = [{
         test: /\.css$/,
         loader: extractCSS.extract('style', 'css')
     }, {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|gif)$/,
         loader: 'url?limit=1&name=images/[name].[ext]'
     }, // Font Definitions
     {

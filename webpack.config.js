@@ -29,7 +29,7 @@ var loaders = [{
         test: /\.css$/,
         loader: extractCSS.extract('style', 'css?sourceMap')
     }, {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|gif)$/,
         loader: 'url'
     }, // Font Definitions
     {

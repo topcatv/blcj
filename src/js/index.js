@@ -39,6 +39,7 @@ $(function () {
 
     let winWidth = $(window).width();
     let winHeight = $(window).height();
+    let videoSrc = curVideo.currentSrc;
     curVideo.style.minHeight = winHeight + "px";
     curVideo.style.width = winWidth + "px";
     //curVideo.videoWidth = winWidth + "px";
@@ -74,7 +75,7 @@ $(function () {
         curVideo = document.getElementById("bgvid");
         if (Modernizr.cssanimations) {
             if (curVideo.src == undefined || curVideo.src == "" || curVideo.src.indexOf('mp4') < 0) {
-                curVideo.src = "../video/publicize.mp4";
+                curVideo.src = videoSrc;
                 play();
             } else if (curVideo.paused) {
                 play();
